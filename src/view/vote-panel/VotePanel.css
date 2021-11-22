@@ -1,4 +1,9 @@
+.selected-vote {
+    cursor: not-allowed;
+}
+
 .non-selected-vote {
     color: transparent;  
     text-shadow: 0 0 0 grey;
+    cursor: pointer;
 }
