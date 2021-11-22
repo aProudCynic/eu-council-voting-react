@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { MemberState } from '../../model/member-state';
+import VotePanel from '../vote-panel/VotePanel';
 
 interface MemberStatePanelProps {
   memberState: MemberState;
@@ -13,7 +14,7 @@ const MemberStatePanel = (props: MemberStatePanelProps) => {
     <tr>
       <td>{memberState.name}</td>
       <td>{memberState.population}</td>
-      <td>{memberState.vote}</td>
+      <VotePanel voteCast={memberState.vote}/>
     </tr>
   );
 }
