@@ -8,7 +8,7 @@ const MemberStates = () => {
 
   return (
     <div className="MemberStates">
-        {memberStates.map(memberState => <p>{memberState.name}</p>)}
+        {memberStates.map(memberState => <p>{memberState.name} {memberState.vote}</p>)}
     </div>
   );
 }
