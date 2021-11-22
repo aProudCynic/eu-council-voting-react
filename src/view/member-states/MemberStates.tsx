@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { MemberState } from '../../model/member-state';
-import MemberStatePanel from './member-state-panel/MemberStatePanel';
+import MemberStatePanel from '../member-state-panel/MemberStatePanel';
 import './MemberStates.css';
 
 const MemberStates = () => {

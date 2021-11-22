@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { MemberState } from '../../../model/member-state';
+import { MemberState } from '../../model/member-state';
 
 interface MemberStatePanelProps {
   memberState: MemberState;
