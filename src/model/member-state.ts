@@ -1,7 +1,11 @@
 export class MemberState {
-    name: string;
+    private _name: string;
 
     constructor(name: string) {
-        this.name = name;
+        this._name = name;
+    }
+
+    public get name() {
+        return this._name;
     }
 }
