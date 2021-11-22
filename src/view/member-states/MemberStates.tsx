@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { MemberState } from '../../model/member-state';
+import MemberStatePanel from './member-state-panel/MemberStatePanel';
 import './MemberStates.css';
 
 const MemberStates = () => {
@@ -9,7 +10,7 @@ const MemberStates = () => {
   return (
     <div className="MemberStates">
       <table>
-        {memberStates.map(memberState => <tr><td>{memberState.name}</td><td>{memberState.population}</td><td>{memberState.vote}</td></tr>)}
+        {memberStates.map(memberState => <MemberStatePanel memberState={memberState}/>)}
       </table>
     </div>
   );
