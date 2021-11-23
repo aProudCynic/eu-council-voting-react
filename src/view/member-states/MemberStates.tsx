@@ -58,15 +58,24 @@ const MemberStates = () => {
       </table>
       <table>
         <tr>
-          <td /><th>Yes</th>
+          <td />
+          {Object.values(Vote).map(
+            vote => <th>{vote}</th>
+          )}
         </tr>
         <tr>
-          <th>Member states</th><td>{(memberStates.filter(memberState => memberState.vote === Vote.YES)).length}</td>
+          <th>Member states</th>
+          {Object.values(Vote).map(
+            vote => <td>{(memberStates.filter(memberState => memberState.vote === vote)).length}</td>
+          )}
         </tr>
         <tr>
-          <th>Population</th><td>{(memberStates.filter(memberState => memberState.vote === Vote.YES))
-          .map(memberState => memberState.population)
-          .reduce(sumReducer, 0)}</td>
+          <th>Population</th>
+          {Object.values(Vote).map(
+            vote => <td>{(memberStates.filter(memberState => memberState.vote === vote))
+              .map(memberState => memberState.population)
+              .reduce(sumReducer, 0)}</td>
+          )}
         </tr>
       </table>
     </div>
