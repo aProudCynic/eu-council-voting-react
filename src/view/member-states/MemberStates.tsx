@@ -47,10 +47,25 @@ const MemberStates = () => {
     });
   }
 
+  const sumReducer = (previousValue: number, currentValue: number) => previousValue + currentValue;
+
   return (
     <div className="MemberStates">
       <table>
         {memberStates.map(memberState => <MemberStatePanel memberState={memberState} voteCastingHandler={voteCastingHandler}/>)}
+      </table>
+      <table>
+        <tr>
+          <td /><th>Yes</th>
+        </tr>
+        <tr>
+          <th>Member states</th><td>{(memberStates.filter(memberState => memberState.vote === Vote.YES)).length}</td>
+        </tr>
+        <tr>
+          <th>Population</th><td>{(memberStates.filter(memberState => memberState.vote === Vote.YES))
+          .map(memberState => memberState.population)
+          .reduce(sumReducer, 0)}</td>
+        </tr>
       </table>
     </div>
   );
