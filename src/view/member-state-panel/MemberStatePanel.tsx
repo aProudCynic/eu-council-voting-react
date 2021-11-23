@@ -1,26 +1,24 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { MemberState } from '../../model/member-state';
 import { Vote } from '../../model/vote';
 import VotePanel from '../vote-panel/VotePanel';
 
 interface MemberStatePanelProps {
   memberState: MemberState;
+  voteCastingHandler: Function;
 }
 
 const MemberStatePanel = (props: MemberStatePanelProps) => {
 
-  const [memberState, setMemberState] = useState(props.memberState);
-
   const castVoteForMemberState = (vote: Vote) => {
-    const updatedMemberState = {...memberState, vote: vote};
-    setMemberState(updatedMemberState);
+    props.voteCastingHandler(vote, props.memberState);
   }
 
   return (
     <tr>
-      <td>{memberState.name}</td>
-      <td>{memberState.population}</td>
-      <VotePanel voteCast={memberState.vote} voteCastingHandler={castVoteForMemberState}/>
+      <td>{props.memberState.name}</td>
+      <td>{props.memberState.population}</td>
+      <VotePanel voteCast={props.memberState.vote} voteCastingHandler={castVoteForMemberState}/>
     </tr>
   );
 }

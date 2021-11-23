@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { MemberState } from '../../model/member-state';
+import { Vote } from '../../model/vote';
 import MemberStatePanel from '../member-state-panel/MemberStatePanel';
 import './MemberStates.css';
 
@@ -33,12 +34,23 @@ const MemberStates = () => {
     new MemberState('Slovakia', 5443120),
     new MemberState('Finland', 5513130),
     new MemberState('Sweden', 10120242),
-  ]);
+  ].sort((memberState1, memberState2) => memberState1.name.localeCompare(memberState2.name)));
+
+  const voteCastingHandler = (vote: Vote, memberStateVoting: MemberState) => {
+    const newMemberStateData = {...memberStateVoting, vote: vote};
+    setMemberStates(previousState => {
+      const newMemberStateArrayData = previousState
+        .filter(memberState => memberStateVoting.name !== memberState.name)
+        .concat(newMemberStateData)
+        .sort((memberState1, memberState2) => memberState1.name.localeCompare(memberState2.name));
+      return newMemberStateArrayData;
+    });
+  }
 
   return (
     <div className="MemberStates">
       <table>
-        {memberStates.map(memberState => <MemberStatePanel memberState={memberState}/>)}
+        {memberStates.map(memberState => <MemberStatePanel memberState={memberState} voteCastingHandler={voteCastingHandler}/>)}
       </table>
     </div>
   );
