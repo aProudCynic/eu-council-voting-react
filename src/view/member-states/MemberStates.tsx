@@ -6,6 +6,8 @@ import './MemberStates.css';
 
 const MemberStates = () => {
 
+  const compareMemberStatesByLocaleName = (memberState1: MemberState, memberState2 : MemberState) => memberState1.name.localeCompare(memberState2.name);
+
   const [memberStates, setMemberStates] = useState([
     new MemberState('Austria', 8822267),
     new MemberState('Belgium', 11413058),
@@ -34,7 +36,7 @@ const MemberStates = () => {
     new MemberState('Slovakia', 5443120),
     new MemberState('Finland', 5513130),
     new MemberState('Sweden', 10120242),
-  ].sort((memberState1, memberState2) => memberState1.name.localeCompare(memberState2.name)));
+  ].sort(compareMemberStatesByLocaleName));
 
   const voteCastingHandler = (vote: Vote, memberStateVoting: MemberState) => {
     const newMemberStateData = { ...memberStateVoting, vote: vote };
@@ -42,7 +44,7 @@ const MemberStates = () => {
       const newMemberStateArrayData = previousState
         .filter(memberState => memberStateVoting.name !== memberState.name)
         .concat(newMemberStateData)
-        .sort((memberState1, memberState2) => memberState1.name.localeCompare(memberState2.name));
+        .sort(compareMemberStatesByLocaleName);
       return newMemberStateArrayData;
     });
   }
