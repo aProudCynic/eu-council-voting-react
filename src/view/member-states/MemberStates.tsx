@@ -37,7 +37,7 @@ const MemberStates = () => {
   ].sort((memberState1, memberState2) => memberState1.name.localeCompare(memberState2.name)));
 
   const voteCastingHandler = (vote: Vote, memberStateVoting: MemberState) => {
-    const newMemberStateData = {...memberStateVoting, vote: vote};
+    const newMemberStateData = { ...memberStateVoting, vote: vote };
     setMemberStates(previousState => {
       const newMemberStateArrayData = previousState
         .filter(memberState => memberStateVoting.name !== memberState.name)
