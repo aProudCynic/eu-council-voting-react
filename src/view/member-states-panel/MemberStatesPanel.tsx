@@ -1,9 +1,9 @@
 import React, { useContext } from 'react';
 import VoteContext from '../../store/vote-context';
 import MemberStatePanel from '../member-state-panel/MemberStatePanel';
-import './MemberStates.css';
+import './MemberStatesPanel.css';
 
-const MemberStates = () => {
+const MemberStatesPanel = () => {
 
   const voteContext = useContext(VoteContext);
 
@@ -16,4 +16,4 @@ const MemberStates = () => {
   );
 }
 
-export default MemberStates;
+export default MemberStatesPanel;

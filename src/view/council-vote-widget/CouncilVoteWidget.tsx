@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { MemberState } from '../../model/member-state';
 import { Vote } from '../../model/vote';
 import VoteContext from '../../store/vote-context';
-import MemberStates from '../member-states/MemberStates';
+import MemberStatesPanel from '../member-states-panel/MemberStatesPanel';
 import VoteBoard from '../vote-board/VoteBoard';
 
 const CouncilVoteWidget = () => {
@@ -52,7 +52,7 @@ const CouncilVoteWidget = () => {
 
     return (
         <VoteContext.Provider value={{memberStates: memberStates, voteCastingHandler: voteCastingHandler}}>
-            <MemberStates />
+            <MemberStatesPanel />
             <VoteBoard />
         </VoteContext.Provider>
     );
