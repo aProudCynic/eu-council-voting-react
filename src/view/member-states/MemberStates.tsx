@@ -1,12 +1,14 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { MemberState } from '../../model/member-state';
 import { Vote } from '../../model/vote';
+import VoteContext from '../../store/vote-context';
 import MemberStatePanel from '../member-state-panel/MemberStatePanel';
+import VoteBoard from '../vote-board/VoteBoard';
 import './MemberStates.css';
 
 const MemberStates = () => {
 
-  const compareMemberStatesByLocaleName = (memberState1: MemberState, memberState2 : MemberState) => memberState1.name.localeCompare(memberState2.name);
+  const compareMemberStatesByLocaleName = (memberState1: MemberState, memberState2: MemberState) => memberState1.name.localeCompare(memberState2.name);
 
   const [memberStates, setMemberStates] = useState([
     new MemberState('Austria', 8822267),
@@ -49,36 +51,15 @@ const MemberStates = () => {
     });
   }
 
-  const sumReducer = (previousValue: number, currentValue: number) => previousValue + currentValue;
-
   return (
-    <div className="MemberStates">
-      <table>
-        {memberStates.map(memberState => <MemberStatePanel memberState={memberState} voteCastingHandler={voteCastingHandler}/>)}
-      </table>
-      <table>
-        <tr>
-          <td />
-          {Object.values(Vote).map(
-            vote => <th>{vote}</th>
-          )}
-        </tr>
-        <tr>
-          <th>Member states</th>
-          {Object.values(Vote).map(
-            vote => <td>{(memberStates.filter(memberState => memberState.vote === vote)).length}</td>
-          )}
-        </tr>
-        <tr>
-          <th>Population</th>
-          {Object.values(Vote).map(
-            vote => <td>{(memberStates.filter(memberState => memberState.vote === vote))
-              .map(memberState => memberState.population)
-              .reduce(sumReducer, 0)}</td>
-          )}
-        </tr>
-      </table>
-    </div>
+    <VoteContext.Provider value={memberStates}>
+      <div className="MemberStates">
+        <table>
+          {memberStates.map(memberState => <MemberStatePanel memberState={memberState} voteCastingHandler={voteCastingHandler} />)}
+        </table>
+      </div>
+      <VoteBoard/>
+    </VoteContext.Provider>
   );
 }
 
