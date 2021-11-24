@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { MemberState } from '../../model/member-state';
 import { Vote } from '../../model/vote';
 import VoteContext from '../../store/vote-context';
+import MassVotingPanel from '../mass-voting-panel/MassVotingPanel';
 import MemberStatesPanel from '../member-states-panel/MemberStatesPanel';
 import VoteResultBoard from '../vote-result-board/VoteResultBoard';
 import VoteSummaryBoard from '../vote-summary-board/VoteSummaryBoard';
@@ -53,6 +54,7 @@ const CouncilVoteWidget = () => {
 
     return (
         <VoteContext.Provider value={{memberStates: memberStates, voteCastingHandler: voteCastingHandler}}>
+            <MassVotingPanel />
             <MemberStatesPanel />
             <VoteSummaryBoard />
             <VoteResultBoard />
