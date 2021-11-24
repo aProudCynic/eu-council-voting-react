@@ -1,26 +1,16 @@
-import React, { useContext, useState } from 'react';
-import { MemberState } from '../../model/member-state';
-import { Vote } from '../../model/vote';
+import React, { useContext } from 'react';
 import VoteContext from '../../store/vote-context';
 import MemberStatePanel from '../member-state-panel/MemberStatePanel';
 import './MemberStates.css';
 
-interface MemberStateProps {
-  voteCastingHandler: Function;
-}
-
-const MemberStates = (props: MemberStateProps) => {
+const MemberStates = () => {
 
   const voteContext = useContext(VoteContext);
-
-  const voteCastingHandler = (vote: Vote, memberStateVoting: MemberState) => {
-    props.voteCastingHandler(vote, memberStateVoting);
-  }
 
   return (
       <div className="MemberStates">
         <table>
-          {voteContext.memberStates.map(memberState => <MemberStatePanel memberState={memberState} voteCastingHandler={voteCastingHandler} />)}
+          {voteContext.memberStates.map(memberState => <MemberStatePanel memberState={memberState} />)}
         </table>
       </div>
   );

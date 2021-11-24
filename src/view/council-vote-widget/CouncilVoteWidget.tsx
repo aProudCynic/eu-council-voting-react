@@ -52,7 +52,7 @@ const CouncilVoteWidget = () => {
 
     return (
         <VoteContext.Provider value={{memberStates: memberStates, voteCastingHandler: voteCastingHandler}}>
-            <MemberStates voteCastingHandler={voteCastingHandler}/>
+            <MemberStates />
             <VoteBoard />
         </VoteContext.Provider>
     );

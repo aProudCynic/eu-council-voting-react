@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Vote } from '../../model/vote';
 import './VotePanel.css';
 
