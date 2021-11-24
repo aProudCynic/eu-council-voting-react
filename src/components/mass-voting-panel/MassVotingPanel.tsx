@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { Vote } from '../../model/vote';
 import VoteContext from '../../store/vote-context';
+import './MassVotingPanel.css';
 
 // TODO think about possible inheritance with VotePanel
 const MassVotingPanel = () => {
@@ -16,7 +17,7 @@ const MassVotingPanel = () => {
   return (
       <div>
         all: {Object.values(Vote).map(
-        vote => <span onClick={() => handleClick(vote)}>{vote}</span>
+        vote => <span className={'clickable-vote'} onClick={() => handleClick(vote)}>{vote}</span>
       )}
       </div>
   );
