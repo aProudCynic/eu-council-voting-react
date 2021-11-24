@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import CouncilVoteWidget from './view/council-vote-widget/CouncilVoteWidget';
+import CouncilVoteWidget from './components/council-vote-widget/CouncilVoteWidget';
 
 function App() {
   return (
