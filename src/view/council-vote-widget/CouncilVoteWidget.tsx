@@ -3,6 +3,7 @@ import { MemberState } from '../../model/member-state';
 import { Vote } from '../../model/vote';
 import VoteContext from '../../store/vote-context';
 import MemberStatesPanel from '../member-states-panel/MemberStatesPanel';
+import VoteResultBoard from '../vote-result-board/VoteResultBoard';
 import VoteSummaryBoard from '../vote-summary-board/VoteSummaryBoard';
 
 const CouncilVoteWidget = () => {
@@ -54,6 +55,7 @@ const CouncilVoteWidget = () => {
         <VoteContext.Provider value={{memberStates: memberStates, voteCastingHandler: voteCastingHandler}}>
             <MemberStatesPanel />
             <VoteSummaryBoard />
+            <VoteResultBoard />
         </VoteContext.Provider>
     );
 }
