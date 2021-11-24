@@ -1,11 +1,11 @@
 import React from 'react';
 import './App.css';
-import MemberStates from './view/member-states/MemberStates';
+import CouncilVoteWidget from './view/council-vote-widget/CouncilVoteWidget';
 
 function App() {
   return (
     <div className="App">
-      <MemberStates/>
+      <CouncilVoteWidget/>
     </div>
   );
 }
