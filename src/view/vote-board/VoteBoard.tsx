@@ -4,7 +4,7 @@ import VoteContext from '../../store/vote-context';
 
 const VoteBoard = () => {
 
-    const memberStates = useContext(VoteContext);
+    const voteContext = useContext(VoteContext);
 
     const sumReducer = (previousValue: number, currentValue: number) => previousValue + currentValue;
 
@@ -19,13 +19,13 @@ const VoteBoard = () => {
             <tr>
                 <th>Member states</th>
                 {Object.values(Vote).map(
-                    vote => <td>{(memberStates.filter(memberState => memberState.vote === vote)).length}</td>
+                    vote => <td>{(voteContext.memberStates.filter(memberState => memberState.vote === vote)).length}</td>
                 )}
             </tr>
             <tr>
                 <th>Population</th>
                 {Object.values(Vote).map(
-                    vote => <td>{(memberStates.filter(memberState => memberState.vote === vote))
+                    vote => <td>{(voteContext.memberStates.filter(memberState => memberState.vote === vote))
                         .map(memberState => memberState.population)
                         .reduce(sumReducer, 0)}</td>
                 )}
