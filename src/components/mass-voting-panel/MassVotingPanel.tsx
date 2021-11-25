@@ -44,9 +44,9 @@ const MassVotingPanel = () => {
     return (
         <div>
             <select onChange={onGroupChanged}>
-                {Object.keys(memberStateGroups).map(key => <option value={key}>{key}</option>)}
+                {Object.keys(memberStateGroups).map(key => <option value={key} key={key}>{key}</option>)}
             </select>: {Object.values(Vote).map(
-                vote => <span className={'clickable-vote'} onClick={() => handleClick(vote)}>{vote}</span>
+                vote => <span className={'clickable-vote'} onClick={() => handleClick(vote)} key={`${vote}_massvote`}>{vote}</span>
             )}
         </div>
     );

@@ -10,7 +10,7 @@ const MemberStatesPanel = () => {
   return (
       <div className="MemberStates">
         <table>
-          {voteContext.memberStates.map(memberState => <MemberStatePanel memberState={memberState} />)}
+          {voteContext.memberStates.map(memberState => <MemberStatePanel memberState={memberState} key={memberState.name}/>)}
         </table>
       </div>
   );
