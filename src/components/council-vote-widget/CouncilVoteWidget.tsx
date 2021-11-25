@@ -45,11 +45,13 @@ const CouncilVoteWidget = () => {
     const voteCastingHandler = (vote: Vote, memberStateVoting: MemberState) => {
         const newMemberStateData = { ...memberStateVoting, vote: vote };
         setMemberStates(previousState => {
-            const newMemberStateArrayData = previousState
-                .filter(memberState => memberStateVoting.name !== memberState.name)
-                .concat(newMemberStateData)
-                .sort(compareMemberStatesByLocaleName);
-            return newMemberStateArrayData;
+            const result = [...previousState];
+            const index = result.indexOf(memberStateVoting);
+            if (index === -1) {
+                throw new Error(`Member state ${memberStateVoting.name} is not found!`);
+            }
+            result[index] = newMemberStateData;
+            return result;
         });
     }
 
