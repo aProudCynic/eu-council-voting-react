@@ -1,18 +1,25 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
+import { MajorityType } from '../../model/majority-type';
 import { Vote } from '../../model/vote';
 import VoteContext from '../../store/vote-context';
 
 const VoteResultBoard = () => {
 
+    const majorities = [
+        new MajorityType('Qualified majority', 55, 65),
+        new MajorityType('Reinforced qualified majority', 72, 65),
+        new MajorityType('Simple majority', 50),
+        new MajorityType('Unanimity', 100),
+    ]
+
     const voteContext = useContext(VoteContext);
 
-    const qualifiedMajority = { populationThresholdPercent: 65, memberStatesThresholdPercent: 55 };
+    const [selectedMajority, setSelectedMajority] = useState(majorities[0])
 
     const yesVotingMemberStates = voteContext.memberStates.filter(memberState => memberState.vote === Vote.YES);
     const notVotingMemberStates = voteContext.memberStates.filter(memberState => memberState.vote === Vote.DID_NOT_VOTE);
-
+    
     const yesVotingMemberStatesPercent = yesVotingMemberStates.length / voteContext.memberStates.length * 100;
-
     const yesVotingPopulationPercent = yesVotingMemberStates
         .map(memberState => memberState.population)
         .reduce((previousValue, currentValue) => previousValue + currentValue, 0)
@@ -21,11 +28,27 @@ const VoteResultBoard = () => {
             .reduce((previousValue, currentValue) => previousValue + currentValue, 0)
         * 100;
 
-    const isPassed = yesVotingPopulationPercent >= qualifiedMajority.populationThresholdPercent && yesVotingMemberStatesPercent >= qualifiedMajority.memberStatesThresholdPercent;
-    const textResult = notVotingMemberStates.length ? `⏳ ${notVotingMemberStates.length} MEMBER STATES STILL NEED TO VOTE` : isPassed ? '✅ APPROVED' : '🛑 REJECTED';
+    const isPopulationThresholdPassed = selectedMajority.populationThresholdPercent ? yesVotingPopulationPercent > selectedMajority.populationThresholdPercent : true;
+    const isMemberStateNumberThresholdPassed = yesVotingMemberStatesPercent >= selectedMajority.memberStatesThresholdPercent;
+    const isPassed = isPopulationThresholdPassed && isMemberStateNumberThresholdPassed;
+
+    const textResult = notVotingMemberStates.length ?
+        `⏳ ${notVotingMemberStates.length} MEMBER STATES STILL NEED TO VOTE` : isPassed ?
+            '✅ APPROVED' : '🛑 REJECTED';
+
+    const onMajorityChanged = (event: any) => {
+        const newlySelectedMajorityName = event.target.value;
+        const newlySelectedMajority = majorities.find(majority => majority.name === newlySelectedMajorityName);
+        if (newlySelectedMajority && newlySelectedMajority !== selectedMajority) {
+            setSelectedMajority(newlySelectedMajority);
+        }
+    }
 
     return (
         <div>
+            <select onChange={onMajorityChanged}>
+                {majorities.map(majority => <option value={majority.name} key={majority.name}>{majority.name}</option>)}
+            </select>
             <table>
                 <tr>
                     <td />
@@ -34,8 +57,8 @@ const VoteResultBoard = () => {
                 </tr>
                 <tr>
                     <th>Required</th>
-                    <td>{qualifiedMajority.memberStatesThresholdPercent}</td>
-                    <td>{qualifiedMajority.populationThresholdPercent}</td>
+                    <td>{selectedMajority.memberStatesThresholdPercent}</td>
+                    <td>{selectedMajority.populationThresholdPercent}</td>
                 </tr>
                 <tr>
                     <th>Current</th>
