@@ -1,4 +1,5 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
+import { MemberState } from '../../model/member-state';
 import { Vote } from '../../model/vote';
 import VoteContext from '../../store/vote-context';
 import './MassVotingPanel.css';
@@ -6,17 +7,45 @@ import './MassVotingPanel.css';
 // TODO think about possible inheritance with VotePanel
 const MassVotingPanel = () => {
 
+    const visegradFourFilter = (memberState: MemberState) => 
+        memberState.name === 'Hungary' || 
+        memberState.name === 'Slovakia' || 
+        memberState.name === 'Czech Republic' || 
+        memberState.name === 'Poland';
+    const beneluxStatesFilter = (memberState: MemberState) => 
+        memberState.name === 'Belgium' || 
+        memberState.name === 'The Netherlands' || 
+        memberState.name === 'Luxembourg';
+    const bigStatesFilter = (memberState: MemberState) =>
+        memberState.population > 50000000;
+    const memberStateGroups: { [key: string]: Function; } = {
+        'all': (_: MemberState) => true,
+        'Visegrad Four': visegradFourFilter,
+        'Benelux states': beneluxStatesFilter,
+        'big states (50m+ population)': bigStatesFilter
+    }
+
     const voteContext = useContext(VoteContext);
 
+    const [groupKey, setGroupKey] = useState<string>('all')
+
     const handleClick = (vote: Vote) => {
-        voteContext.memberStates.forEach(
+        voteContext.memberStates
+        .filter((memberState: MemberState) => memberStateGroups[groupKey](memberState))
+        .forEach(
             memberState => voteContext.voteCastingHandler(vote, memberState)
         );
     }
 
+    const onGroupChanged = (event: any) => {
+        setGroupKey(event.target.value);
+    };
+
     return (
         <div>
-            all: {Object.values(Vote).map(
+            <select onChange={onGroupChanged}>
+                {Object.keys(memberStateGroups).map(key => <option value={key}>{key}</option>)}
+            </select>: {Object.values(Vote).map(
                 vote => <span className={'clickable-vote'} onClick={() => handleClick(vote)}>{vote}</span>
             )}
         </div>
