@@ -18,15 +18,9 @@ const CouncilVoteWidget = () => {
 
     const voteCastingHandler = (vote: Vote, memberStateVoting: MemberState) => {
         const newMemberStateData = { ...memberStateVoting, vote: vote };
-        setMemberStates(previousState => {
-            const result = [...previousState];
-            const index = result.indexOf(memberStateVoting);
-            if (index === -1) {
-                throw new Error(`Member state ${memberStateVoting.name} is not found!`);
-            }
-            result[index] = newMemberStateData;
-            return result;
-        });
+        setMemberStates(previousState => previousState.map(
+            memberState => memberState.name === memberStateVoting.name ? newMemberStateData : memberState
+        ));
     }
 
     return (
