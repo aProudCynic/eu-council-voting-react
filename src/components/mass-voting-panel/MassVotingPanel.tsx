@@ -33,7 +33,7 @@ const MassVotingPanel = () => {
         voteContext.memberStates
         .filter((memberState: MemberState) => memberStateGroups[groupKey](memberState))
         .forEach(
-            memberState => voteContext.voteCastingHandler(vote, memberState)
+            memberState => voteContext.castVote(vote, memberState)
         );
     }
 

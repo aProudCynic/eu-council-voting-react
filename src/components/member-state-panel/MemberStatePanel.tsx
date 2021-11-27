@@ -13,7 +13,7 @@ const MemberStatePanel = (props: MemberStatePanelProps) => {
   const voteContext = useContext(VoteContext);
 
   const castVoteForMemberState = (vote: Vote) => {
-    voteContext.voteCastingHandler(vote, props.memberState);
+    voteContext.castVote(vote, props.memberState);
   }
 
   return (

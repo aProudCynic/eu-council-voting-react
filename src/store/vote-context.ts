@@ -3,9 +3,9 @@ import { MemberState } from '../model/member-state';
 
 interface VoteContextProps {
   memberStates: MemberState[];
-  voteCastingHandler: Function;
+  castVote: Function;
 }
 
-const VoteContext = React.createContext<VoteContextProps>({memberStates: [], voteCastingHandler: () => {}});
+const VoteContext = React.createContext<VoteContextProps>({memberStates: [], castVote: () => {}});
 
 export default VoteContext;
