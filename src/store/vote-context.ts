@@ -1,4 +1,4 @@
-import React from 'react';
+import { createStore, Reducer } from  'redux';
 import { MemberState } from '../model/member-state';
 
 interface VoteContextProps {
@@ -6,6 +6,14 @@ interface VoteContextProps {
   castVote: Function;
 }
 
-const VoteContext = React.createContext<VoteContextProps>({memberStates: [], castVote: () => {}});
+const voteReducer: Reducer = (state = {memberStates: []}, action) => {
+  switch(action.type) {
+    case 'castVote':
+      // TODO
+      break;
+  }
+}
 
-export default VoteContext;
+const voteContext = createStore(voteReducer);
+
+export default voteContext;
