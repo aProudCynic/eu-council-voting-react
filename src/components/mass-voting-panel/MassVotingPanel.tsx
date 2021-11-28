@@ -18,11 +18,14 @@ const MassVotingPanel = () => {
         memberState.name === 'Luxembourg';
     const bigStatesFilter = (memberState: MemberState) =>
         memberState.population > 50000000;
+    const eurozoneMemberFilter = (memberState: MemberState) => memberState.eurozoneMember;
     const memberStateGroups: { [key: string]: Function; } = {
         'all': (_: MemberState) => true,
         'Visegrad Four': visegradFourFilter,
         'Benelux states': beneluxStatesFilter,
-        'big states (50m+ population)': bigStatesFilter
+        'big states (50m+ population)': bigStatesFilter,
+        'Eurozone member': eurozoneMemberFilter,
+        'non-Eurozone member': (memberState: MemberState) => !eurozoneMemberFilter(memberState)
     }
 
     const voteContext = useContext(VoteContext);
