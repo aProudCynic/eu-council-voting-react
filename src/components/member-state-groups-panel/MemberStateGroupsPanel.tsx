@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react';
 import { MemberState } from '../../model/member-state';
 import { Vote } from '../../model/vote';
 import VoteContext from '../../store/vote-context';
-import './MassVotingPanel.css';
+import './MemberStateGroupsPanel.css';
 
 // TODO think about possible inheritance with VotePanel
 const MassVotingPanel = () => {
