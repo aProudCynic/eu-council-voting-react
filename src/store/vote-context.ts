@@ -1,16 +1,23 @@
 import { createStore, Reducer } from  'redux';
 import { MemberState } from '../model/member-state';
+import { MemberStatesConstantLoader } from '../service/member-states-constant-loader';
 
-interface VoteContextProps {
+export interface StoreProps {
   memberStates: MemberState[];
-  castVote: Function;
 }
 
-const voteReducer: Reducer = (state = {memberStates: []}, action) => {
+const memberStatesLoader = new MemberStatesConstantLoader();
+
+const voteReducer: Reducer = (state: StoreProps = {memberStates: memberStatesLoader.loadMemberStates()}, action) => {
   switch(action.type) {
     case 'castVote':
-      // TODO
-      break;
+      const newMemberStateData = { ...action.memberStateVoting, vote: action.vote };
+      const newMemberStatesData = state.memberStates.map(
+        (memberState: MemberState) => memberState.name === action.memberStateVoting.name ? newMemberStateData : memberState
+      );
+      return {...state, memberStates: newMemberStatesData};
+    default:
+      return state;
   }
 }
 
