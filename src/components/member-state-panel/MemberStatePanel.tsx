@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import { useDispatch } from 'react-redux';
 import { MemberState } from '../../model/member-state';
 import { Vote } from '../../model/vote';
 import VoteContext from '../../store/vote-context';
@@ -10,10 +11,10 @@ interface MemberStatePanelProps {
 
 const MemberStatePanel = (props: MemberStatePanelProps) => {
 
-  const voteContext = useContext(VoteContext);
+  const dispatch = useDispatch();
 
   const castVoteForMemberState = (vote: Vote) => {
-    voteContext.castVote(vote, props.memberState);
+    dispatch({type: 'castVote', vote: vote, memberStateVoting: props.memberState})
   }
 
   return (

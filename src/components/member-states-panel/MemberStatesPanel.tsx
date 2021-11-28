@@ -1,16 +1,17 @@
-import React, { useContext } from 'react';
-import VoteContext from '../../store/vote-context';
+import React from 'react';
+import { useSelector } from 'react-redux';
+import { MemberState } from '../../model/member-state';
 import MemberStatePanel from '../member-state-panel/MemberStatePanel';
 import './MemberStatesPanel.css';
 
 const MemberStatesPanel = () => {
 
-  const voteContext = useContext(VoteContext);
+  const memberStates = useSelector((state: {memberStates: MemberState[]}) => state.memberStates);
 
   return (
       <div className="MemberStates">
         <table>
-          {voteContext.memberStates.map(memberState => <MemberStatePanel memberState={memberState} key={memberState.name}/>)}
+          {memberStates.map(memberState => <MemberStatePanel memberState={memberState} key={memberState.name}/>)}
         </table>
       </div>
   );

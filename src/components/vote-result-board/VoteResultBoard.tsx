@@ -1,7 +1,8 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 import { MajorityType } from '../../model/majority-type';
+import { MemberState } from '../../model/member-state';
 import { Vote } from '../../model/vote';
-import VoteContext from '../../store/vote-context';
 
 const VoteResultBoard = () => {
 
@@ -12,18 +13,18 @@ const VoteResultBoard = () => {
         new MajorityType('Unanimity', 100),
     ]
 
-    const voteContext = useContext(VoteContext);
+    const memberStates = useSelector((state: {memberStates: MemberState[]}) => state.memberStates);
 
     const [selectedMajority, setSelectedMajority] = useState(majorities[0])
 
-    const yesVotingMemberStates = voteContext.memberStates.filter(memberState => memberState.vote === Vote.YES);
-    const notVotingMemberStates = voteContext.memberStates.filter(memberState => memberState.vote === Vote.DID_NOT_VOTE);
+    const yesVotingMemberStates = memberStates.filter(memberState => memberState.vote === Vote.YES);
+    const notVotingMemberStates = memberStates.filter(memberState => memberState.vote === Vote.DID_NOT_VOTE);
     
-    const yesVotingMemberStatesPercent = yesVotingMemberStates.length / voteContext.memberStates.length * 100;
+    const yesVotingMemberStatesPercent = yesVotingMemberStates.length / memberStates.length * 100;
     const yesVotingPopulationPercent = yesVotingMemberStates
         .map(memberState => memberState.population)
         .reduce((previousValue, currentValue) => previousValue + currentValue, 0)
-        / voteContext.memberStates
+        / memberStates
             .map(memberState => memberState.population)
             .reduce((previousValue, currentValue) => previousValue + currentValue, 0)
         * 100;

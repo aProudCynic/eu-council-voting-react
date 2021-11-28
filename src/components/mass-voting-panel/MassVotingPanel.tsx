@@ -1,11 +1,14 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { MemberState } from '../../model/member-state';
 import { Vote } from '../../model/vote';
-import VoteContext from '../../store/vote-context';
 import './MassVotingPanel.css';
 
 // TODO think about possible inheritance with VotePanel
 const MassVotingPanel = () => {
+
+    const memberStates = useSelector((state: {memberStates: MemberState[]}) => state.memberStates);
+    const dispatch = useDispatch();
 
     const visegradFourFilter = (memberState: MemberState) => 
         memberState.name === 'Hungary' || 
@@ -28,15 +31,13 @@ const MassVotingPanel = () => {
         'non-Eurozone member': (memberState: MemberState) => !eurozoneMemberFilter(memberState)
     }
 
-    const voteContext = useContext(VoteContext);
-
     const [groupKey, setGroupKey] = useState<string>('all')
 
     const handleClick = (vote: Vote) => {
-        voteContext.memberStates
+        memberStates
         .filter((memberState: MemberState) => memberStateGroups[groupKey](memberState))
         .forEach(
-            memberState => voteContext.castVote(vote, memberState)
+            (memberState: MemberState) => dispatch({type: 'castVote', vote: vote, memberStateVoting: memberState})
         );
     }
 

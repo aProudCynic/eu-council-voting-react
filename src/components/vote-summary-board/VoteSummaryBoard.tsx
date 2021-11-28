@@ -1,10 +1,11 @@
-import React, { useContext } from 'react';
+import React from 'react';
+import { useSelector } from 'react-redux';
+import { MemberState } from '../../model/member-state';
 import { Vote } from '../../model/vote';
-import VoteContext from '../../store/vote-context';
 
 const VoteSummaryBoard = () => {
 
-    const voteContext = useContext(VoteContext);
+    const memberStates = useSelector((state: {memberStates: MemberState[]}) => state.memberStates);
 
     const sumReducer = (previousValue: number, currentValue: number) => previousValue + currentValue;
 
@@ -22,13 +23,13 @@ const VoteSummaryBoard = () => {
                 <tr>
                     <th>Member states</th>
                     {Object.values(Vote).map(
-                        vote => <td key={`${vote}_ms`}>{(voteContext.memberStates.filter(memberState => memberState.vote === vote)).length}</td>
+                        vote => <td key={`${vote}_ms`}>{(memberStates.filter(memberState => memberState.vote === vote)).length}</td>
                     )}
                 </tr>
                 <tr>
                     <th>Population</th>
                     {Object.values(Vote).map(
-                        vote => <td key={`${vote}_pop`}>{(voteContext.memberStates.filter(memberState => memberState.vote === vote))
+                        vote => <td key={`${vote}_pop`}>{(memberStates.filter(memberState => memberState.vote === vote))
                             .map(memberState => memberState.population)
                             .reduce(sumReducer, 0)}</td>
                     )}
