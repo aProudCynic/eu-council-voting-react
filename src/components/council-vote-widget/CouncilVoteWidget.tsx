@@ -24,7 +24,7 @@ const CouncilVoteWidget = () => {
 
     return (
         <VoteContext.Provider value={{ memberStates: memberStates, castVote: voteCastingHandler }}>
-            <div className='widget-container'>
+            <div className='CouncilVoteWidget'>
                 <VoteCastingPanel />
                 <div>
                     <VoteAggregateBoard />
