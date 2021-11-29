@@ -4,10 +4,9 @@ import { Vote } from '../../model/vote';
 import { MemberStatesConstantLoader } from '../../service/member-states-constant-loader';
 import { MemberStatesLoader } from '../../service/member-states-loader';
 import VoteContext from '../../store/vote-context';
-import MemberStateGroupsPanel from '../member-state-groups-panel/MemberStateGroupsPanel';
-import MemberStatesPanel from '../member-states-panel/MemberStatesPanel';
+import VoteCastingPanel from '../vote-casting-panel/vote-casting-panel';
 import VoteResultBoard from '../vote-result-board/VoteResultBoard';
-import VoteSummaryBoard from '../vote-summary-board/VoteSummaryBoard';
+import VoteAggregateBoard from '../vote-aggregate-board/VoteAggregateBoard';
 import './CouncilVoteWidget.css';
 
 const CouncilVoteWidget = () => {
@@ -26,12 +25,9 @@ const CouncilVoteWidget = () => {
     return (
         <VoteContext.Provider value={{ memberStates: memberStates, castVote: voteCastingHandler }}>
             <div className='widget-container'>
+                <VoteCastingPanel />
                 <div>
-                    <MemberStateGroupsPanel />
-                    <MemberStatesPanel />
-                </div>
-                <div>
-                    <VoteSummaryBoard />
+                    <VoteAggregateBoard />
                     <VoteResultBoard />
                 </div>
             </div>
