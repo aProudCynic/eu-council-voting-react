@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { Vote } from '../../model/vote';
 import VoteContext from '../../store/vote-context';
 
-const VoteSummaryBoard = () => {
+const VoteAggregateBoard = () => {
 
     const voteContext = useContext(VoteContext);
 
@@ -38,4 +38,4 @@ const VoteSummaryBoard = () => {
     );
 }
 
-export default VoteSummaryBoard;
+export default VoteAggregateBoard;
