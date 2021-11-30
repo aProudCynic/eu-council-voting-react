@@ -6,14 +6,8 @@ This project simulates voting in the EU Council. It is similar to [the "official
 
 ## Roadmap
 
-### 1.0
-
-- Feature parity with the official app (e.g. Eurozone members)
-- Voting by groups
-
 ### 2.0
 
-- Configurable by query params (e.g. preset member states' votes)
 - Locking mechanism for certain member states' votes
 - Select feature to manipulate votes of more member states in a more customizable way
 
