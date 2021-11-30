@@ -16,8 +16,7 @@ const CouncilVoteWidget = () => {
     const [memberStates, setMemberStates] = useState(memberStatesLoader.loadMemberStates());
 
     const voteCastingHandler = (vote: Vote, memberStateVoting: MemberState) => {
-        const newMemberStateData = Object.assign({}, memberStateVoting);
-        newMemberStateData.vote = vote;
+        const newMemberStateData = {...memberStateVoting, vote};
         setMemberStates(previousState => previousState.map(
             memberState => memberState.id === newMemberStateData.id ? newMemberStateData : memberState
         ));
