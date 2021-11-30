@@ -6,12 +6,12 @@ This project simulates voting in the EU Council. It is similar to [the "official
 
 ## Roadmap
 
-### 2.0
+### 1.0 - 2.0
 
 - Locking mechanism for certain member states' votes
 - Select feature to manipulate votes of more member states in a more customizable way
 
-### 3.0
+### 2.0 - 3.0
 
 - Introduce date of voting
   - handle EU and Eurozone membership
