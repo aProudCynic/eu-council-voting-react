@@ -3,7 +3,7 @@ import { MemberState } from '../../model/member-state';
 import { Vote } from '../../model/vote';
 import { MemberStatesLoader } from '../../service/member-states-loader';
 import VoteContext from '../../store/vote-context';
-import VoteCastingPanel from '../vote-casting-panel/vote-casting-panel';
+import VoteCastingPanel from '../vote-casting-panel/VoteCastingPanel';
 import { MemberStatesQueryParamLoader } from '../../service/member-states-query-param-loader';
 import VoteSummaryPanel from '../vote-summary-panel/VoteSummaryPanel';
 import './CouncilVoteWidget.css';
