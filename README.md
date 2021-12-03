@@ -8,9 +8,9 @@ This project simulates voting in the EU Council. It is similar to [the "official
 
 ### 1.0 - 2.0
 
-- Locking mechanism for certain member states' votes
-- Select feature to manipulate votes of more member states in a more customizable way
 - Query params to recreate vote can be "exported" (copy-pasted) based on current votes
+- Select feature to manipulate votes of more member states in a more customizable way
+- Locking mechanism for certain member states' votes
 
 ### 2.0 - 3.0
 
