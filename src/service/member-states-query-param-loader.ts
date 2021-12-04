@@ -2,6 +2,12 @@ import { MemberState } from "../model/member-state";
 import { Vote } from "../model/vote";
 import { MemberStatesConstantLoader } from "./member-states-constant-loader";
 
+export const VOTE_QUERY_PARAMETER_RESOLVER = new Map<string, Vote>([
+    ['0', Vote.DID_NOT_VOTE],
+    ['Y', Vote.YES],
+    ['N', Vote.NO],
+    ['A', Vote.ABSENT],
+]);
 export class MemberStatesQueryParamLoader extends MemberStatesConstantLoader {
 
     loadMemberStates = () => {
@@ -21,16 +27,7 @@ export class MemberStatesQueryParamLoader extends MemberStatesConstantLoader {
     }
 
     private matchVoteWith = (memberStateVoteData: string): Vote | undefined => {
-        switch (memberStateVoteData) {
-            case '0':
-                return Vote.DID_NOT_VOTE;
-            case 'Y':
-                return Vote.YES;
-            case 'N':
-                return Vote.NO;
-            case 'A':
-                return Vote.ABSENT;
-        }
+        return VOTE_QUERY_PARAMETER_RESOLVER.get(memberStateVoteData);
     }
 
 }
