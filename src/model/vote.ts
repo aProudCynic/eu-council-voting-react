@@ -1,6 +1,6 @@
 export enum Vote {
-    YES = ' 👍',
-    NO = ' 👎',
+    YES = '👍',
+    NO = '👎',
     ABSENT = '🤷‍♂️',
     DID_NOT_VOTE = '🚫',
 }
