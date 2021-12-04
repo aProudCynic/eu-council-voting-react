@@ -1,4 +1,3 @@
-import { render } from "@testing-library/react";
 import { useContext } from "react";
 import { MemberState } from "../../model/member-state";
 import { Vote } from "../../model/vote";
@@ -10,7 +9,6 @@ const QueryExportPanel = () => {
     const voteContext = useContext(VoteContext);
 
     const getKeyByValue = (map: Map<string, Vote>, searchValue: string): string | undefined => {
-        console.log(Object.entries(map), searchValue)
         return Array.from(map.keys()).find(key => map.get(key) === searchValue);
     }
 
