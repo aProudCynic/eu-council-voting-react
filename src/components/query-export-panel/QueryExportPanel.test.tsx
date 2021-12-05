@@ -39,18 +39,23 @@ it("Query params are rendered correctly for all three vote types", () => {
 
 it("Default vote type is not rendered to query params", () => {
 
-    const yesmanlandCode = 'YES'
+    const yesmanlandVote = Vote.YES;
+    const yesmanlandCode = 'YES';
     const yesmanland = new MemberState(yesmanlandCode, 'Yesmanland', 1000);
-    yesmanland.vote = Vote.YES;
+    yesmanland.vote = yesmanlandVote;
 
-    const republicOfNotVotingCode = 'DID_NOT_VOTE'
-    const republicOfNotVoting = new MemberState(republicOfNotVotingCode, 'Republic of Not Voting', 1000);
-    republicOfNotVoting.vote = Vote.DID_NOT_VOTE;
+    const republicOfNotVotingCode = 'DEFAULT'
+    const republicOfNotVoting = new MemberState(republicOfNotVotingCode, 'Republic of Default Vote', 1000);
+    republicOfNotVoting.vote = MemberState.DEFAULT_VOTE;
 
     renderVoteContext([
         yesmanland,
         republicOfNotVoting,
     ]);
 
+    // safety measure to ensure that test fails of default vote is changed to yes
+    // @ts-ignore to let TypeScript compile despite cleverly deducing that this is currently always false
+    expect(MemberState.DEFAULT_VOTE === yesmanlandVote).toBeFalsy();
+    
     expect(screen.getByDisplayValue('http://localhost?YES=Y')).toBeInTheDocument();
 })
