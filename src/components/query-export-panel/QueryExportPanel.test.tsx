@@ -14,6 +14,8 @@ function renderVoteContext(memberStates: MemberState[]) {
     );
 }
 
+const urlBase = 'http://localhost?';
+
 it("Query params are rendered correctly for all three vote types", () => {
 
     const yesmanlandCode = 'YES'
@@ -34,7 +36,7 @@ it("Query params are rendered correctly for all three vote types", () => {
         abstainia,
     ]);
 
-    expect(screen.getByDisplayValue('http://localhost?YES=Y&NO=N&ABSTAIN=A')).toBeInTheDocument();
+    expect(screen.getByDisplayValue(`${urlBase}YES=Y&NO=N&ABSTAIN=A`)).toBeInTheDocument();
 })
 
 it("Default vote type is not rendered to query params", () => {
@@ -45,5 +47,5 @@ it("Default vote type is not rendered to query params", () => {
 
     renderVoteContext([republicOfNotVoting]);
     
-    expect(screen.getByDisplayValue('http://localhost?')).toBeInTheDocument();
+    expect(screen.getByDisplayValue(urlBase)).toBeInTheDocument();
 })
