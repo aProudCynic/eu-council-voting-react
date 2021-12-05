@@ -18,7 +18,8 @@ const QueryExportPanel = () => {
         var result = `${location.protocol}//${location.host}${queryParamInitializer}`;
         memberStates.forEach(memberState => {
             const voteValue = getKeyByValue(VOTE_QUERY_PARAMETER_RESOLVER, memberState.vote);
-            const isFirstValueToBeAdded = result === queryParamInitializer;
+            const lastCharacter = result.charAt(result.length - 1);
+            const isFirstValueToBeAdded = lastCharacter === queryParamInitializer;
             if (!isFirstValueToBeAdded) {
                 result += '&'
             }

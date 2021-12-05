@@ -34,5 +34,5 @@ it("Query params are rendered correctly for all three vote types", () => {
         abstainia,
     ]);
 
-    expect(screen.getByDisplayValue('http://localhost?&YES=Y&NO=N&ABSTAIN=A')).toBeInTheDocument();
+    expect(screen.getByDisplayValue('http://localhost?YES=Y&NO=N&ABSTAIN=A')).toBeInTheDocument();
 })
