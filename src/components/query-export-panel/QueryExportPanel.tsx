@@ -12,6 +12,7 @@ const QueryExportPanel = () => {
         return Array.from(map.keys()).find(key => map.get(key) === searchValue);
     }
 
+    // TODO extract next to import function
     const generateQuery = (memberStates: MemberState[]) => {
         const queryParamInitializer = '?';
         // eslint-disable-next-line no-restricted-globals
