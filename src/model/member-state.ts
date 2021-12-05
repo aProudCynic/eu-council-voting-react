@@ -1,6 +1,8 @@
 import { Vote } from "./vote";
 
 export class MemberState {
+    public static readonly DEFAULT_VOTE = Vote.DID_NOT_VOTE;
+
     public id: string;
     public name: string;
     public population: number;
@@ -11,7 +13,7 @@ export class MemberState {
         this.id = id;
         this.name = name;
         this.population = population;
-        this.vote = Vote.DID_NOT_VOTE;
+        this.vote = MemberState.DEFAULT_VOTE;
         this.eurozoneMember = eurozoneMember;
     }
 }
