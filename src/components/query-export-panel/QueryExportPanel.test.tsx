@@ -36,3 +36,21 @@ it("Query params are rendered correctly for all three vote types", () => {
 
     expect(screen.getByDisplayValue('http://localhost?YES=Y&NO=N&ABSTAIN=A')).toBeInTheDocument();
 })
+
+it("Default vote type is not rendered to query params", () => {
+
+    const yesmanlandCode = 'YES'
+    const yesmanland = new MemberState(yesmanlandCode, 'Yesmanland', 1000);
+    yesmanland.vote = Vote.YES;
+
+    const republicOfNotVotingCode = 'DID_NOT_VOTE'
+    const republicOfNotVoting = new MemberState(republicOfNotVotingCode, 'Republic of Not Voting', 1000);
+    republicOfNotVoting.vote = Vote.DID_NOT_VOTE;
+
+    renderVoteContext([
+        yesmanland,
+        republicOfNotVoting,
+    ]);
+
+    expect(screen.getByDisplayValue('http://localhost?YES=Y')).toBeInTheDocument();
+})
