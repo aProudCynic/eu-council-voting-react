@@ -18,14 +18,15 @@ const QueryExportPanel = () => {
         // eslint-disable-next-line no-restricted-globals
         var result = `${location.protocol}//${location.host}${queryParamInitializer}`;
         memberStates.forEach(memberState => {
-            const voteValue = getKeyByValue(VOTE_QUERY_PARAMETER_RESOLVER, memberState.vote);
-            const lastCharacter = result.charAt(result.length - 1);
-            const isFirstValueToBeAdded = lastCharacter === queryParamInitializer;
-            if (!isFirstValueToBeAdded) {
-                result += '&'
+            if (memberState.vote !== MemberState.DEFAULT_VOTE) {
+                const voteValue = getKeyByValue(VOTE_QUERY_PARAMETER_RESOLVER, memberState.vote);
+                const lastCharacter = result.charAt(result.length - 1);
+                const isFirstValueToBeAdded = lastCharacter === queryParamInitializer;
+                if (!isFirstValueToBeAdded) {
+                    result += '&'
+                }
+                result += `${memberState.id}=${voteValue}`;
             }
-            result += `${memberState.id}=${voteValue}`;
-
         })
         return result;
     }
