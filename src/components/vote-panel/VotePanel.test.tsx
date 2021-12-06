@@ -1,6 +1,6 @@
 import { render, unmountComponentAtNode } from "react-dom";
 import { act } from "react-dom/test-utils";
-import { Vote } from "../../model/vote";
+import { vote } from "../../model/vote";
 import VotePanel from "./VotePanel";
 
 let container: HTMLDivElement = document.createElement("div");
@@ -18,7 +18,7 @@ afterEach(() => {
 
 it("renders votes for all possible values", () => {
     act(() => {
-      render(<VotePanel voteCast={Vote.YES} voteCastingHandler={() => {}} />, container);
+      render(<VotePanel voteCast={vote.yes} voteCastingHandler={() => {}} />, container);
     });
-    Object.values(Vote).forEach(vote => expect(container.textContent).toContain(vote))
+    Object.values(vote).forEach(vote => expect(container.textContent).toContain(vote.icon))
 })
