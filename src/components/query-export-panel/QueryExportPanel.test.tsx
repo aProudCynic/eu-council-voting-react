@@ -1,7 +1,7 @@
 
 import { render, screen } from "@testing-library/react";
 import { MemberState } from "../../model/member-state";
-import { Vote } from "../../model/vote";
+import { vote } from "../../model/vote";
 import VoteContext from "../../store/vote-context";
 import QueryExportPanel from "./QueryExportPanel";
 
@@ -20,15 +20,15 @@ it("Query params are rendered correctly for all three vote types", () => {
 
     const yesmanlandCode = 'YES'
     const yesmanland = new MemberState(yesmanlandCode, 'Yesmanland', 1000);
-    yesmanland.vote = Vote.YES;
+    yesmanland.vote = vote.yes;
 
     const naysayerstanCode = 'NO';
     const naysayerstan = new MemberState(naysayerstanCode, 'Naysayerstan', 1000);
-    naysayerstan.vote = Vote.NO;
+    naysayerstan.vote = vote.no;
 
     const abstaniaCode = 'ABSTAIN';
     const abstainia = new MemberState(abstaniaCode, 'Abstainia', 1000);
-    abstainia.vote = Vote.ABSENT;
+    abstainia.vote = vote.abstain;
 
     renderVoteContext([
         yesmanland,

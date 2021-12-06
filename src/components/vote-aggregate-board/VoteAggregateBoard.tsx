@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Vote } from '../../model/vote';
+import { vote } from '../../model/vote';
 import VoteContext from '../../store/vote-context';
 
 const VoteAggregateBoard = () => {
@@ -13,22 +13,22 @@ const VoteAggregateBoard = () => {
             <thead>
                 <tr>
                     <td />
-                    {Object.values(Vote).map(
-                        vote => <th key={vote}>{vote}</th>
+                    {Object.values(vote).map(
+                        vote => <th key={vote.code}>{vote.icon}</th>
                     )}
                 </tr>
             </thead>
             <tbody>
                 <tr>
                     <th>Member states</th>
-                    {Object.values(Vote).map(
-                        vote => <td key={`${vote}_ms`}>{(voteContext.memberStates.filter(memberState => memberState.vote === vote)).length}</td>
+                    {Object.values(vote).map(
+                        vote => <td key={`${vote.code}_ms`}>{(voteContext.memberStates.filter(memberState => memberState.vote === vote)).length}</td>
                     )}
                 </tr>
                 <tr>
                     <th>Population</th>
-                    {Object.values(Vote).map(
-                        vote => <td key={`${vote}_pop`}>{(voteContext.memberStates.filter(memberState => memberState.vote === vote))
+                    {Object.values(vote).map(
+                        vote => <td key={`${vote.code}_pop`}>{(voteContext.memberStates.filter(memberState => memberState.vote === vote))
                             .map(memberState => memberState.population)
                             .reduce(sumReducer, 0)}</td>
                     )}

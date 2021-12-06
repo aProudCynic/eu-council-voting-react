@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { MemberState } from '../../model/member-state';
-import { Vote } from '../../model/vote';
+import { vote, VoteType } from '../../model/vote';
 import VoteContext from '../../store/vote-context';
 import './MemberStateGroupsPanel.css';
 
@@ -18,7 +18,7 @@ const MassVotingPanel = () => {
         memberState.name === 'Luxembourg';
     const bigStatesFilter = (memberState: MemberState) =>
         memberState.population > 50000000;
-    const eurozoneMemberFilter = (memberState: MemberState) => memberState.eurozoneMember;
+    const eurozoneMemberFilter = (memberState: MemberState) => memberState.isEurozoneMember;
     const memberStateGroups: { [key: string]: Function; } = {
         'all': (_: MemberState) => true,
         'Visegrad Four': visegradFourFilter,
@@ -32,7 +32,7 @@ const MassVotingPanel = () => {
 
     const [groupKey, setGroupKey] = useState<string>('all')
 
-    const handleClick = (vote: Vote) => {
+    const handleClick = (vote: VoteType) => {
         voteContext.memberStates
         .filter((memberState: MemberState) => memberStateGroups[groupKey](memberState))
         .forEach(
@@ -48,8 +48,8 @@ const MassVotingPanel = () => {
         <div>
             <select onChange={onGroupChanged}>
                 {Object.keys(memberStateGroups).map(key => <option value={key} key={key}>{key}</option>)}
-            </select>: {Object.values(Vote).map(
-                vote => <span className={'clickable-vote'} onClick={() => handleClick(vote)} key={`${vote}_massvote`}>{vote}</span>
+            </select>: {Object.values(vote).map(
+                vote => <span className={'clickable-vote'} onClick={() => handleClick(vote)} key={`${vote.code}_massvote`}>{vote.icon}</span>
             )}
         </div>
     );

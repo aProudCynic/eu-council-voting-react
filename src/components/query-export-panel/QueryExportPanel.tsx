@@ -1,15 +1,18 @@
 import { useContext } from "react";
 import { MemberState } from "../../model/member-state";
-import { Vote } from "../../model/vote";
-import { VOTE_QUERY_PARAMETER_RESOLVER } from "../../service/member-states-query-param-loader";
+import { vote, VoteType } from "../../model/vote";
 import VoteContext from "../../store/vote-context";
 
-const QueryExportPanel = () => {
+const QueryExportPanel = (): JSX.Element => {
 
     const voteContext = useContext(VoteContext);
 
-    const getKeyByValue = (map: Map<string, Vote>, searchValue: string): string | undefined => {
-        return Array.from(map.keys()).find(key => map.get(key) === searchValue);
+    const getKeyByValue = (voteTypes: Record<string, VoteType>, searchValue: VoteType): string => {
+        const voteTypeEntry = Object.entries(voteTypes).find(voteTypeEntry => voteTypeEntry[1] === searchValue);
+        if (!voteTypeEntry) {
+            throw new Error(`Unindentifiable vote type for ${searchValue}`)
+        }
+        return voteTypeEntry[0];
     }
 
     // TODO extract next to import function
@@ -19,7 +22,7 @@ const QueryExportPanel = () => {
         var result = `${location.protocol}//${location.host}${queryParamInitializer}`;
         memberStates.forEach(memberState => {
             if (memberState.vote !== MemberState.DEFAULT_VOTE) {
-                const voteValue = getKeyByValue(VOTE_QUERY_PARAMETER_RESOLVER, memberState.vote);
+                const voteValue = getKeyByValue(vote, memberState.vote);
                 const lastCharacter = result.charAt(result.length - 1);
                 const isFirstValueToBeAdded = lastCharacter === queryParamInitializer;
                 if (!isFirstValueToBeAdded) {

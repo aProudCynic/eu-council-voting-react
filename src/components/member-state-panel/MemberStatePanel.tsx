@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { MemberState } from '../../model/member-state';
-import { Vote } from '../../model/vote';
+import { VoteType } from '../../model/vote';
 import VoteContext from '../../store/vote-context';
 import VotePanel from '../vote-panel/VotePanel';
 
@@ -12,7 +12,7 @@ const MemberStatePanel = (props: MemberStatePanelProps) => {
 
   const voteContext = useContext(VoteContext);
 
-  const castVoteForMemberState = (vote: Vote) => {
+  const castVoteForMemberState = (vote: VoteType) => {
     voteContext.castVote(vote, props.memberState);
   }
 

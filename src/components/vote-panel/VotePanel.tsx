@@ -1,22 +1,22 @@
 import React from 'react';
-import { Vote } from '../../model/vote';
+import { vote, VoteType } from '../../model/vote';
 import './VotePanel.css';
 
 interface VotePanelProps {
-  voteCast: Vote;
+  voteCast: VoteType;
   voteCastingHandler: Function;
 }
 
 const VotePanel = (props: VotePanelProps) => {
 
-  const handleClick = (vote: Vote) => {
+  const handleClick = (vote: VoteType) => {
     props.voteCastingHandler(vote);
   }
   
   return (
     <td>
-      {Object.values(Vote).map(
-        vote => <span className = {vote === props.voteCast ? 'selected-vote' : 'non-selected-vote'} onClick={() => handleClick(vote)} key={vote}>{vote}</span>
+      {Object.values(vote).map(
+        vote => <span className = {vote === props.voteCast ? 'selected-vote' : 'non-selected-vote'} onClick={() => handleClick(vote)} key={vote.code}>{vote.icon}</span>
       )}
     </td>
   );

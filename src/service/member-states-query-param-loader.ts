@@ -1,13 +1,7 @@
 import { MemberState } from "../model/member-state";
-import { Vote } from "../model/vote";
+import { vote, VoteType } from "../model/vote";
 import { MemberStatesConstantLoader } from "./member-states-constant-loader";
 
-export const VOTE_QUERY_PARAMETER_RESOLVER = new Map<string, Vote>([
-    ['0', Vote.DID_NOT_VOTE],
-    ['Y', Vote.YES],
-    ['N', Vote.NO],
-    ['A', Vote.ABSENT],
-]);
 export class MemberStatesQueryParamLoader extends MemberStatesConstantLoader {
 
     loadMemberStates = () => {
@@ -17,7 +11,7 @@ export class MemberStatesQueryParamLoader extends MemberStatesConstantLoader {
         Object.entries(queryParams).forEach(queryParam => {
             const memberStateToChange: MemberState | undefined = memberStates.find(memberState => memberState.id === queryParam[0]);
             if (memberStateToChange) {
-                const newVote: Vote | undefined = this.matchVoteWith(queryParam[1]);
+                const newVote: VoteType | undefined = this.matchVoteWith(queryParam[1]);
                 if (newVote) {
                     memberStateToChange.vote = newVote;
                 }
@@ -26,8 +20,8 @@ export class MemberStatesQueryParamLoader extends MemberStatesConstantLoader {
         return memberStates;
     }
 
-    private matchVoteWith = (memberStateVoteData: string): Vote | undefined => {
-        return VOTE_QUERY_PARAMETER_RESOLVER.get(memberStateVoteData);
+    private matchVoteWith = (memberStateVoteData: string): VoteType | undefined => {
+        return Object.values(vote).find(voteValue => voteValue.code === memberStateVoteData);
     }
 
 }
