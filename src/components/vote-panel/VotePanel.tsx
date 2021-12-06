@@ -16,7 +16,10 @@ const VotePanel = (props: VotePanelProps) => {
   return (
     <td>
       {Object.values(vote).map(
-        vote => <span className = {vote === props.voteCast ? 'selected-vote' : 'non-selected-vote'} onClick={() => handleClick(vote)} key={vote.code}>{vote.icon}</span>
+        vote => <span 
+          className = {vote === props.voteCast ? 'selected-vote' : 'non-selected-vote'} 
+          onClick={() => handleClick(vote)} key={vote.code}>{vote.icon}
+        </span>
       )}
     </td>
   );
