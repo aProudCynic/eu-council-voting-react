@@ -3,4 +3,5 @@ export enum Vote {
     NO = ' 👎',
     ABSENT = '🤷‍♂️',
     DID_NOT_VOTE = '🚫',
+    EXCLUDED = '⛔',
 }

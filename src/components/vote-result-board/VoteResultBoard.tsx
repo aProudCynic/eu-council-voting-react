@@ -1,5 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { MajorityType } from '../../model/majority-type';
+import { MemberState } from '../../model/member-state';
 import { Vote } from '../../model/vote';
 import VoteContext from '../../store/vote-context';
 
@@ -18,12 +19,13 @@ const VoteResultBoard = () => {
 
     const yesVotingMemberStates = voteContext.memberStates.filter(memberState => memberState.vote === Vote.YES);
     const notVotingMemberStates = voteContext.memberStates.filter(memberState => memberState.vote === Vote.DID_NOT_VOTE);
+    const eligibleMemberStates = voteContext.memberStates.filter(memberState => memberState.vote !== Vote.EXCLUDED);
     
-    const yesVotingMemberStatesPercent = yesVotingMemberStates.length / voteContext.memberStates.length * 100;
+    const yesVotingMemberStatesPercent = yesVotingMemberStates.length / eligibleMemberStates.length * 100;
     const yesVotingPopulationPercent = yesVotingMemberStates
         .map(memberState => memberState.population)
         .reduce((previousValue, currentValue) => previousValue + currentValue, 0)
-        / voteContext.memberStates
+        / eligibleMemberStates
             .map(memberState => memberState.population)
             .reduce((previousValue, currentValue) => previousValue + currentValue, 0)
         * 100;
