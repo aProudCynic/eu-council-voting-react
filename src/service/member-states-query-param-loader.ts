@@ -30,6 +30,8 @@ export class MemberStatesQueryParamLoader extends MemberStatesConstantLoader {
                 return Vote.NO;
             case 'A':
                 return Vote.ABSENT;
+            case 'X':
+                return Vote.EXCLUDED;
         }
     }
 
