@@ -8,3 +8,7 @@
 ### 1.1
 
 - Configurable by query params (e.g. preset member states' votes)
+
+### 1.2
+
+- Added "excluded" vote type
