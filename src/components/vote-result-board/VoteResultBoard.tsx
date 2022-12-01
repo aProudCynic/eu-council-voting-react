@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
+import { Formatters } from '../../formatters';
 import { MajorityType } from '../../model/majority-type';
-import { MemberState } from '../../model/member-state';
 import { Vote } from '../../model/vote';
 import VoteContext from '../../store/vote-context';
 
@@ -64,8 +64,8 @@ const VoteResultBoard = () => {
                 </tr>
                 <tr>
                     <th>Current</th>
-                    <td>{yesVotingMemberStatesPercent}</td>
-                    <td>{yesVotingPopulationPercent}</td>
+                    <td>{Formatters.PERCENTAGE_FORMATTER.format(yesVotingMemberStatesPercent)}</td>
+                    <td>{Formatters.PERCENTAGE_FORMATTER.format(yesVotingPopulationPercent)}</td>
                 </tr>
             </table>
             <p>{textResult}</p>

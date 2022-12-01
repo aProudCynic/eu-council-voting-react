@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { MemberState } from '../../model/member-state';
 import { Vote } from '../../model/vote';
+import { Formatters } from '../../formatters';
 import VoteContext from '../../store/vote-context';
 import VotePanel from '../vote-panel/VotePanel';
 
@@ -19,7 +20,7 @@ const MemberStatePanel = (props: MemberStatePanelProps) => {
   return (
     <tr>
       <td>{props.memberState.name}</td>
-      <td>{props.memberState.population}</td>
+      <td>{Formatters.POPULATION_FORMATTER.format(props.memberState.population)}</td>
       <VotePanel voteCast={props.memberState.vote} voteCastingHandler={castVoteForMemberState}/>
     </tr>
   );
