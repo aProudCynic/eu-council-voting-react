@@ -29,8 +29,13 @@ const VoteAggregateBoard = () => {
                 <tr>
                     <th>Population</th>
                     {Object.values(Vote).map(
-                        vote => <td key={`${vote}_pop`}>{
-                            Formatters.PERCENTAGE_FORMATTER.format(
+                        vote => <td
+                            key={`${vote}_pop`}
+                            title={'' + (voteContext.memberStates.filter(memberState => memberState.vote === vote))
+                                .map(memberState => memberState.population)
+                                .reduce(sumReducer, 0)}
+                        >{
+                            Formatters.POPULATION_FORMATTER.format(
                                 (voteContext.memberStates.filter(memberState => memberState.vote === vote))
                                     .map(memberState => memberState.population)
                                     .reduce(sumReducer, 0)

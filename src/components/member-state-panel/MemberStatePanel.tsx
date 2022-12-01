@@ -20,7 +20,7 @@ const MemberStatePanel = (props: MemberStatePanelProps) => {
   return (
     <tr>
       <td>{props.memberState.name}</td>
-      <td>{Formatters.POPULATION_FORMATTER.format(props.memberState.population)}</td>
+      <td title={'' + props.memberState.population}>{Formatters.POPULATION_FORMATTER.format(props.memberState.population)}</td>
       <VotePanel voteCast={props.memberState.vote} voteCastingHandler={castVoteForMemberState}/>
     </tr>
   );

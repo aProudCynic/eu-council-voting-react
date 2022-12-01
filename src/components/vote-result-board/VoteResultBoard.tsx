@@ -64,8 +64,8 @@ const VoteResultBoard = () => {
                 </tr>
                 <tr>
                     <th>Current</th>
-                    <td>{Formatters.PERCENTAGE_FORMATTER.format(yesVotingMemberStatesPercent)}</td>
-                    <td>{Formatters.PERCENTAGE_FORMATTER.format(yesVotingPopulationPercent)}</td>
+                    <td title={'' + yesVotingMemberStatesPercent}>{Formatters.PERCENTAGE_FORMATTER.format(yesVotingMemberStatesPercent)}</td>
+                    <td title={'' + yesVotingPopulationPercent}>{Formatters.PERCENTAGE_FORMATTER.format(yesVotingPopulationPercent)}</td>
                 </tr>
             </table>
             <p>{textResult}</p>
